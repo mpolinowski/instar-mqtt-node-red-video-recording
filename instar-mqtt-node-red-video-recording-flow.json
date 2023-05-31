@@ -1,0 +1,753 @@
+[
+    {
+        "id": "e38003f441ebe758",
+        "type": "tab",
+        "label": "Rec",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8739c3f13d21f8c8",
+        "type": "mqtt out",
+        "z": "e38003f441ebe758",
+        "name": "task/video/rec/start",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8c9bd856c466f9b0",
+        "x": 410,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "6f2456fbbab22c65",
+        "type": "function",
+        "z": "e38003f441ebe758",
+        "name": "topic",
+        "func": "const command = 'task/video/rec/start';\nconst prefix = 'cameras/115/';\n\nmsg.topic = prefix + command;\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 100,
+        "wires": [
+            [
+                "8739c3f13d21f8c8"
+            ]
+        ]
+    },
+    {
+        "id": "030ecf3a64bd5f6c",
+        "type": "mqtt out",
+        "z": "e38003f441ebe758",
+        "name": "task/video/rec/stop",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8c9bd856c466f9b0",
+        "x": 370,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "0f73a30e35c79b4f",
+        "type": "function",
+        "z": "e38003f441ebe758",
+        "name": "topic",
+        "func": "const command = 'task/video/rec/stop';\nconst prefix = 'cameras/115/';\n\nmsg.topic = prefix + command;\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 160,
+        "wires": [
+            [
+                "030ecf3a64bd5f6c"
+            ]
+        ]
+    },
+    {
+        "id": "c4edc7fd9949a938",
+        "type": "ui_button",
+        "z": "e38003f441ebe758",
+        "name": "",
+        "group": "a0240f14e128be2a",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Stop Rec ",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"val\":\"1\"}",
+        "payloadType": "json",
+        "topic": "payload",
+        "topicType": "msg",
+        "x": 80,
+        "y": 160,
+        "wires": [
+            [
+                "0f73a30e35c79b4f"
+            ]
+        ]
+    },
+    {
+        "id": "29faba26eada713d",
+        "type": "ui_button",
+        "z": "e38003f441ebe758",
+        "name": "",
+        "group": "09317789e191eb54",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Rec 15 s",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"val\":\"15\"}",
+        "payloadType": "json",
+        "topic": "payload",
+        "topicType": "msg",
+        "x": 80,
+        "y": 40,
+        "wires": [
+            [
+                "6f2456fbbab22c65"
+            ]
+        ]
+    },
+    {
+        "id": "bf689785c1bb9391",
+        "type": "mqtt in",
+        "z": "e38003f441ebe758",
+        "name": "status/task/video/rec/status",
+        "topic": "",
+        "qos": "1",
+        "datatype": "json",
+        "broker": "8c9bd856c466f9b0",
+        "nl": false,
+        "rap": false,
+        "rh": 0,
+        "inputs": 1,
+        "x": 430,
+        "y": 220,
+        "wires": [
+            [
+                "118ab23f493f1983"
+            ]
+        ]
+    },
+    {
+        "id": "5c2d7ffeaa6b92b7",
+        "type": "inject",
+        "z": "e38003f441ebe758",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "action",
+                "v": "subscribe",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "cameras/118/status/multimedia/privacy/region1/enable",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 220,
+        "wires": [
+            [
+                "55ea5d8af491144f"
+            ]
+        ]
+    },
+    {
+        "id": "55ea5d8af491144f",
+        "type": "function",
+        "z": "e38003f441ebe758",
+        "name": "topic",
+        "func": "const prefix = 'cameras/115/';\nconst command = 'status/task/video/rec/status';\n\nmsg.topic = prefix + command;\nmsg.action = \"subscribe\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 220,
+        "wires": [
+            [
+                "bf689785c1bb9391"
+            ]
+        ]
+    },
+    {
+        "id": "0b48b3f3fea8fe3f",
+        "type": "ui_text",
+        "z": "e38003f441ebe758",
+        "group": "b5b84f7fd6c2880d",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Recording",
+        "format": "{{msg.payload.val}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 490,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "ca8d124da8d2480d",
+        "type": "switch",
+        "z": "e38003f441ebe758",
+        "name": "",
+        "property": "payload.val",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 150,
+        "y": 340,
+        "wires": [
+            [
+                "edd7b22f50035fbb"
+            ],
+            [
+                "e929a3d0cdfdb3cb"
+            ],
+            [
+                "c717a562e191540a"
+            ],
+            [
+                "bf5386262d036980"
+            ]
+        ]
+    },
+    {
+        "id": "edd7b22f50035fbb",
+        "type": "change",
+        "z": "e38003f441ebe758",
+        "name": "none",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.val",
+                "pt": "msg",
+                "to": "no recording",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 280,
+        "wires": [
+            [
+                "0b48b3f3fea8fe3f"
+            ]
+        ]
+    },
+    {
+        "id": "e929a3d0cdfdb3cb",
+        "type": "change",
+        "z": "e38003f441ebe758",
+        "name": "alarm",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.val",
+                "pt": "msg",
+                "to": "alarm recording",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 320,
+        "wires": [
+            [
+                "0b48b3f3fea8fe3f"
+            ]
+        ]
+    },
+    {
+        "id": "c717a562e191540a",
+        "type": "change",
+        "z": "e38003f441ebe758",
+        "name": "scheduled",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.val",
+                "pt": "msg",
+                "to": "planned recording",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 360,
+        "wires": [
+            [
+                "0b48b3f3fea8fe3f"
+            ]
+        ]
+    },
+    {
+        "id": "bf5386262d036980",
+        "type": "change",
+        "z": "e38003f441ebe758",
+        "name": "manual",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.val",
+                "pt": "msg",
+                "to": "manual recording",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 400,
+        "wires": [
+            [
+                "0b48b3f3fea8fe3f"
+            ]
+        ]
+    },
+    {
+        "id": "3d07f2e539d21010",
+        "type": "ui_button",
+        "z": "e38003f441ebe758",
+        "name": "",
+        "group": "09317789e191eb54",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Rec 45 s",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"val\":\"45\"}",
+        "payloadType": "json",
+        "topic": "payload",
+        "topicType": "msg",
+        "x": 80,
+        "y": 80,
+        "wires": [
+            [
+                "6f2456fbbab22c65"
+            ]
+        ]
+    },
+    {
+        "id": "87863e6587c95ee7",
+        "type": "ui_button",
+        "z": "e38003f441ebe758",
+        "name": "",
+        "group": "09317789e191eb54",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Rec 60 s",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"val\":\"60\"}",
+        "payloadType": "json",
+        "topic": "payload",
+        "topicType": "msg",
+        "x": 80,
+        "y": 120,
+        "wires": [
+            [
+                "6f2456fbbab22c65"
+            ]
+        ]
+    },
+    {
+        "id": "4b80fbece6ec19d3",
+        "type": "link in",
+        "z": "e38003f441ebe758",
+        "name": "link in 234",
+        "links": [
+            "118ab23f493f1983"
+        ],
+        "x": 55,
+        "y": 340,
+        "wires": [
+            [
+                "ca8d124da8d2480d"
+            ]
+        ]
+    },
+    {
+        "id": "118ab23f493f1983",
+        "type": "link out",
+        "z": "e38003f441ebe758",
+        "name": "link out 5",
+        "mode": "link",
+        "links": [
+            "4b80fbece6ec19d3"
+        ],
+        "x": 575,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "012692be293acaba",
+        "type": "mqtt in",
+        "z": "e38003f441ebe758",
+        "name": "status/task/video/planrec/enable",
+        "topic": "",
+        "qos": "1",
+        "datatype": "json",
+        "broker": "8c9bd856c466f9b0",
+        "nl": false,
+        "rap": false,
+        "rh": 0,
+        "inputs": 1,
+        "x": 450,
+        "y": 460,
+        "wires": [
+            [
+                "6b9ebe020a081235"
+            ]
+        ]
+    },
+    {
+        "id": "d064a2cdf0a31cb7",
+        "type": "mqtt out",
+        "z": "e38003f441ebe758",
+        "name": "task/video/planrec/enable",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8c9bd856c466f9b0",
+        "x": 570,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "8052840239f38d52",
+        "type": "ui_switch",
+        "z": "e38003f441ebe758",
+        "name": "",
+        "label": "Enable",
+        "tooltip": "",
+        "group": "14841718d7dff539",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "str",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "str",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 260,
+        "y": 500,
+        "wires": [
+            [
+                "1ffd9687988877d9"
+            ]
+        ]
+    },
+    {
+        "id": "d58065fad9dcfab7",
+        "type": "inject",
+        "z": "e38003f441ebe758",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "action",
+                "v": "subscribe",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "cameras/118/status/multimedia/privacy/region1/enable",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 460,
+        "wires": [
+            [
+                "ef72f6de68ae15ad"
+            ]
+        ]
+    },
+    {
+        "id": "ef72f6de68ae15ad",
+        "type": "function",
+        "z": "e38003f441ebe758",
+        "name": "topic",
+        "func": "const prefix = 'cameras/115/';\nconst command = 'status/task/video/planrec/enable';\n\nmsg.topic = prefix + command;\nmsg.action = \"subscribe\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 460,
+        "wires": [
+            [
+                "012692be293acaba"
+            ]
+        ]
+    },
+    {
+        "id": "1ffd9687988877d9",
+        "type": "function",
+        "z": "e38003f441ebe758",
+        "name": "topic",
+        "func": "const prefix = 'cameras/115/';\nconst command = 'task/video/planrec/enable/raw';\n\nmsg.topic = prefix + command;\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 500,
+        "wires": [
+            [
+                "d064a2cdf0a31cb7"
+            ]
+        ]
+    },
+    {
+        "id": "21dcd30399a1e539",
+        "type": "change",
+        "z": "e38003f441ebe758",
+        "name": "value",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.val",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 130,
+        "y": 500,
+        "wires": [
+            [
+                "8052840239f38d52"
+            ]
+        ]
+    },
+    {
+        "id": "dc058be2fe56df08",
+        "type": "link in",
+        "z": "e38003f441ebe758",
+        "name": "link in 235",
+        "links": [
+            "6b9ebe020a081235"
+        ],
+        "x": 45,
+        "y": 500,
+        "wires": [
+            [
+                "21dcd30399a1e539"
+            ]
+        ]
+    },
+    {
+        "id": "6b9ebe020a081235",
+        "type": "link out",
+        "z": "e38003f441ebe758",
+        "name": "link out 6",
+        "mode": "link",
+        "links": [
+            "dc058be2fe56df08"
+        ],
+        "x": 615,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "8c9bd856c466f9b0",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.2.115",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "5",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a0240f14e128be2a",
+        "type": "ui_group",
+        "name": "Stop Recording",
+        "tab": "8bc4b79cc7336533",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "09317789e191eb54",
+        "type": "ui_group",
+        "name": "Trigger Recording",
+        "tab": "8bc4b79cc7336533",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b5b84f7fd6c2880d",
+        "type": "ui_group",
+        "name": "Rec Status",
+        "tab": "8bc4b79cc7336533",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "14841718d7dff539",
+        "type": "ui_group",
+        "name": "Scheduled Recording",
+        "tab": "8bc4b79cc7336533",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8bc4b79cc7336533",
+        "type": "ui_tab",
+        "name": "Video Recording",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
